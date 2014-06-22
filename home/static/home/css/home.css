@@ -1,0 +1,18 @@
+
+.logo {
+    width: 200px;
+}
+
+.team img {
+    width: 200px;
+    height: 200px;
+}
+
+.team .cell {
+    height: 300px;
+}
+
+.agreement {
+    padding-top: 70px;
+    padding-bottom: 300px;
+}

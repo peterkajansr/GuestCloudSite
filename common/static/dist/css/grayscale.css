@@ -361,21 +361,3 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color: rgba(255,255,255,.2);
 }
-
-.logo {
-	width: 200px;
-}
-
-.team img {
-	width: 200px;
-	height: 200px;
-}
-
-.team .cell {
-	height: 300px;
-}
-
-.agreement {
-	padding-top: 70px;
-	padding-bottom: 300px;
-}

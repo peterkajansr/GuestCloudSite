@@ -1,5 +1,4 @@
-
-
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,16 +9,16 @@
 
     <title>Cooperation proposal</title>
 
-    <link rel="stylesheet" href="static/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'dist/css/bootstrap.min.css'%}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="static/dist/css/grayscale.css" rel="stylesheet">
+    <link href="{% static 'dist/css/grayscale.css' %}" rel="stylesheet">
 
     <!-- Fonts -->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'home/css/home.css' %}" />
   </head>
 
   <body>
@@ -30,7 +29,7 @@
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
             <i class="fa fa-bars"></i>
           </button>
-          <!-- <a class="navbar-brand" href="#page-top"> <span class="light">Cooperation proposal</span> </a> -->
+          <a class="navbar-brand" href="#page-top"> <span class="light">Cooperation proposal</span> </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -49,9 +48,6 @@
             <li class="page-scroll">
               <a href="#tech">Technologies</a>
             </li>
-            <li class="page-scroll">
-              <a href="#agreement">Working agreement</a>
-            </li>
           </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -64,7 +60,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
-              <h1 class="brand-heading">New web for<br/> pickatale.com</h1>
+              <h1 class="brand-heading">New web for pickatale.com</h1>
               <p class="intro-text">
                 Suggested model for cooperation with pickatale.com on new web development.
               </p>
@@ -86,61 +82,59 @@
           </p>
         </div>
         <div class="col-sm-6 col-md-4 cell">
-          <div class="img-circular" style="background-image:url(static/proposal/img/kubek.png);"></div>
+          <img src="{% static 'home/img/kubek.jpg' %}" />
           <p>
             Vojtech Kubek
-            <br>
+          </p>
+          <p>
             Designer
           </p>
-       
-            
-         
         </div>
         <div class="col-sm-6 col-md-4 cell">
-          <div class="img-circular" style="background-image:url(static/proposal/img/kajan.jpg);"></div>
+          <img src="{% static 'home/img/kajan.jpg' %}" />
           <p>
             Peter Kajan
-            <br>
+          </p>
+          <p>
             Technical lead
           </p>
-         
-            
-          
         </div>
         <div class="col-sm-6 col-md-4 cell">
-          <div class="img-circular" style="background-image:url(static/proposal/img/kociova.jpg);"></div>
+          <img src="{% static 'home/img/kociova.jpg' %}" />
           <p>
             Michaela Kočiová
-            <br>
+          </p>
+          <p>
             UX/UI Analyst
           </p>
-         
         </div>
         <div class="col-sm-6 col-md-4 cell">
-          <div class="img-circular" style="background-image:url(static/proposal/img/uhercik.jpg);"></div>
+          <img src="{% static 'home/img/uhercik.jpg' %}" />
           <p>
             Tomáš Uherčík
-            <br>
+          </p>
+          <p>
             Web developer
           </p>
-          
         </div>
         <div class="col-sm-6 col-md-4 cell">
-          <div class="img-circular" style="background-image:url(static/proposal/img/kompanek.jpg);"></div>
+          <img src="{% static 'home/img/kompanek.jpg' %}" />
           <p>
             Matej Kompánek
-            <br>
+          </p>
+          <p>
             Web developer
           </p>
         </div>
         <div class="col-sm-6 col-md-4 cell">
-          <div class="img-circular" style="background-image:url(static/proposal/img/palesova.jpg);"></div>
+          <img src="{% static 'home/img/palesova.jpg' %}" />
           <p>
             Petra Pálešová
-            <br>
+          </p>
+          <p>
             Brand manager
           </p>
-          </div>
+        </div>
 			</div>
 			
 			<div class="row">
@@ -160,7 +154,7 @@
 	            <p>
 	              We develop software by using an agile methodology Scrum that iteratively delivers demanded features. Each iteration results in working software that is ready for deployment. Scrum technology enables our team to quickly develop first working version and respond to emerging requirements.
 	            </p>
-	            <img src="static/proposal/img/ScrumCycle.png"/>
+	            <img src="{% static 'home/img/ScrumCycle.png' %}"/>
 	            <p>
 	              A customer defines requirements at the beginning of each iteration. These requirements are analyzed, implemented and tested by our team. At the end of the iteration, the implemented features are presented to customer who either approves them or suggests improvements. The process offers:
 	            </p>
@@ -192,44 +186,22 @@
     <section id="tech" class="content-section text-center">
       <div>
         <div class="container">
-        	<div class="row">
-	          <div class="col-lg-8 col-lg-offset-2">
-	            <h2>Technologies</h2>
-	            <p>
-	              We suggest the following technologies:
-	            </p>
-	          </div>
-	          <div class="col-sm-4 col-sm-offset-2">
-	            <img src="static/proposal/img/django.png" class="logo"/>
-	            <p>
-	              Web framework
-	            </p>
-	          </div>
-	          <div class="col-sm-4">
-	            <img src="static/proposal/img/bootstrap.jpg" class="logo"/>
-	            <p>
-	              Frontend framework for responsive design
-	            </p>
-	          </div>
-          </div>
-          <div class="row">
-		        <div class="page-scroll">
-		          <a href="#agreement" class="btn btn-circle"> <i class="fa fa-angle-double-down animated"></i> </a>
-		        </div>
-      		</div>
-        </div>
-      </div>
-    </section>
-    
-    <section id="agreement" class="content-section text-center">
-      <div>
-        <div class="container agreement">
           <div class="col-lg-8 col-lg-offset-2">
-            <h2>Working agreement</h2>
+            <h2>Technologies</h2>
             <p>
-              Duration of one iteration: 2 - 4 weeks<br/>
-							Working hours per week: 80 -160<br/>
-							Hourly rate: 25 euros first iteration, 45 euros subsequent iterations<br/>
+              We suggest the following technologies:
+            </p>
+          </div>
+          <div class="col-sm-4 col-sm-offset-2">
+            <img src="{% static 'home/img/django.png' %}" class="logo"/>
+            <p>
+              Web framework
+            </p>
+          </div>
+          <div class="col-sm-4">
+            <img src="{% static 'home/img/bootstrap.jpg' %}" class="logo"/>
+            <p>
+              Frontend framework for responsive design
             </p>
           </div>
         </div>
@@ -237,9 +209,9 @@
     </section>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="static/dist/js/bootstrap.min.js"></script>
+    <script src="{% static 'dist/js/bootstrap.min.js' %}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="static/dist/js/grayscale.js"></script>
+    <script src="{% static 'dist/js/grayscale.js' %}"></script>
 
   </body>
 </html>
