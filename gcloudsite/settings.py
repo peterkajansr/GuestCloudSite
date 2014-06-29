@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap3',
     'home',
     'common',
     'crm',
@@ -86,3 +87,7 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/profiles'
 AUTH_USER_MODEL = 'crm.User'
+
+BOOTSTRAP3 = {
+    'horizontal_label_class': 'col-md-offset-3 col-md-2',
+}

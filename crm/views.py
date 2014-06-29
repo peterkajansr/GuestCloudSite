@@ -5,6 +5,7 @@ from django.http.response import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.views import redirect_to_login
 from crm.forms import UserCreationForm
+# from firebasein.firebase import Firebase
 
 
 
@@ -12,6 +13,9 @@ from crm.forms import UserCreationForm
 def profile_home(request, username):
     if request.user.username != username:
         raise Http404()
+    
+#     firebase = Firebase('https://guestflow.firebaseio.com/')
+#     print firebase.child('users')
     return render(request, 'crm/profile_home.html', {})
 
 @login_required
