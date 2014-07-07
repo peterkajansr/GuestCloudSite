@@ -13,6 +13,12 @@
     {% bootstrap_css %}
     
     <link rel="stylesheet" href="{% static 'crm/css/crm.css' %}" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    {% bootstrap_javascript %}
+    
+    {% block head %}
+    {% endblock %}
   </head>
 
   <body>
@@ -21,8 +27,6 @@
     
     {% endblock %}
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    {% bootstrap_javascript %}
-    <script src="{% static 'dist/js/grayscale.js' %}"></script>
+    
   </body>
 </html>
