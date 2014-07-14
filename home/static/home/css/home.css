@@ -1,18 +1,86 @@
+/* custom styles*/    
+.bottom_zero {
+    text-align:center;   
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.margin_top100{
+    margin-top:100px;
+}
+
+.margin_top50{
+    margin-top:50px;
+}
+
+.font-hover:hover {
+    color: lightgreen;
+}
+
+.white{
+    color: #fff;
+}
+
+.icon-h-large:hover {
+    color: #28c3ab;
+    font-size: 55px;
+}
+
+.icon-h-large{
+   -webkit-transition: font-size 0.4s, color 0.4s; /* For Safari 3.1 to 6.0 */
+    transition: font-size 0.4s, color 0.4s;
+}
+
+.anim_fadeout{
+    -webkit-animation: fade 1s; /* Chrome, Safari, Opera */
+    animation: fade 1s;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-direction: reverse;
+    animation-direction: reverse;
+}
+
+.anim_fadein{
+    -webkit-animation: fade 1s; /* Chrome, Safari, Opera */
+    animation: fade 1s;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes fade {
+    0% {color: rgba(0,0,0,1);}
+    50% {color: rgba(0,0,0,0);}
+    100% {color: rgba(0,0,0,1);}
+}
+
+/* Standard syntax */
+@keyframes fade {
+    0% {color: rgba(0,0,0,1);}
+    50% {color: rgba(0,0,0,0);}
+    100% {color: rgba(0,0,0,1);}
+}
+
+.light {
+    font-weight: 100;
+}
 
 .logo {
     width: 200px;
 }
 
-.team img {
-    width: 200px;
-    height: 200px;
+.solution .main-heading {
+    margin-top: 60px;
 }
 
-.team .cell {
-    height: 300px;
+.solution .cell {
+    margin-bottom: 50px;
+}
+.solution .cell p {
+    margin: 0;
 }
 
-.agreement {
-    padding-top: 70px;
-    padding-bottom: 300px;
+.solution .cell .images {
+    height: 60px;
+    padding-top: 5px;
 }
