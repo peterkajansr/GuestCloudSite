@@ -104,3 +104,16 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+
+
+/* CUSTOM css */
+.table-search-cont {
+    width: 80%;
+    margin: auto;
+}
+
+.table-info-cont {
+    width: 80%;
+    margin: 0 auto 20px;
+}

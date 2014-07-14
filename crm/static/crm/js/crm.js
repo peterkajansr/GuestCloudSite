@@ -10,9 +10,15 @@ $(document).ready(function() {
             "visible": false,
             "searchable": false
         }
-      ]
+      ],
+      "bPaginate": false,
+      "dom": '<"table-info-cont clearfix"i>rt<"bottom">',
     });
     initFirebase();
+    
+    $('#search').on('input', function() {
+        table.search($(this).val()).draw();     
+    });
 } );
 
 function getListDr(eventId) {
