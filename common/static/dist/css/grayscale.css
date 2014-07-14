@@ -1,9 +1,10 @@
 body {
     width: 100%;
     height: 100%;
-    font-family: 'Courgette', cursive,Helvetica,Arial,sans-serif;
-    color: #5B2B45;
+    font-family: 'Roboto', sans-serif;
+    color: #000;
     background-color: #fff;
+    font-weight:100;
 }
 
 html {
@@ -18,10 +19,9 @@ h4,
 h5,
 h6 {
     margin: 0 0 35px;
-    /*text-transform: uppercase;*/
-    font-family: 'Courgette', cursive,Helvetica,Arial,sans-serif;
-    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
     letter-spacing: 1px;
+    font-weight: 100;
 }
 
 p {
@@ -39,7 +39,7 @@ p {
 }
 
 a {
-    color: #28c3ab;
+    color: #000;
     -webkit-transition: all .2s ease-in-out;
     -moz-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
@@ -48,37 +48,20 @@ a {
 a:hover,
 a:focus {
     text-decoration: none;
-    color: #176e61;
-}
-
-
-
-.img-circular{
- width: 200px;
- height: 200px;
- background-size: cover;
- display: block;
-  border-radius: 100px;
- -webkit-border-radius: 100px;
- -moz-border-radius: 100px;
-}
-
-
-
-.light {
-    font-weight: 400;
+    color: #28c3ab;
 }
 
 .navbar {
     margin-bottom: 0;
     border-bottom: 1px solid rgba(255,255,255,.3);
     text-transform: uppercase;
-    font-family: 'Courgette', cursive,Helvetica,Arial,sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: #fff;
+    font-weight: 400;
 }
 
 .navbar-brand {
-    font-weight: 700;
+    font-weight: 100;
 }
 
 .navbar-brand:focus {
@@ -86,7 +69,7 @@ a:focus {
 }
 
 .navbar-custom a {
-    color: #5B2B45;
+    color: #fff;
 }
 
 .navbar-custom .nav li a {
@@ -105,7 +88,7 @@ a:focus {
 .navbar-toggle {
     padding: 4px 6px;
     font-size: 16px;
-    color: #fff;
+    color: #000;
 }
 
 .navbar-toggle:focus,
@@ -113,7 +96,7 @@ a:focus {
     outline: 0;
 }
 
-@media(min-width:767px) {
+@media(min-width:768px) {
     .navbar {
         padding: 20px 0;
         border-bottom: 0;
@@ -127,13 +110,18 @@ a:focus {
     .top-nav-collapse {
         padding: 0;
         background-color: #fff;
+        
     }
 
     .navbar-custom.top-nav-collapse {
         border-bottom: 1px solid rgba(255,255,255,.3);
+        
     }
+    
+    .navbar-custom.top-nav-collapse a {
+        color: black;
+    } 
 }
-
 .intro {
     display: table;
     width: 100%;
@@ -141,41 +129,106 @@ a:focus {
     padding: 100px 0;
     text-align: center;
     color: #fff;
-    background: url(../img/bokeh.jpg) no-repeat bottom center scroll;
     background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+    font-weight: 100;
 }
 
-.intro-body {
+.solution {
+    display: table;
+    width: 100%;
+    height: auto;
+    padding: 100px 0;
+    text-align: center;
+    color: #000;
+    background-color: #fff;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    font-weight: 100;
+}
+
+.references {
+    display: table;
+    width: 100%;
+    height: auto;
+    padding: 100px 0;
+    text-align: center;
+    color: #fff;
+    background-color: #000;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    font-weight: 100;
+}
+
+.contact {
+    display: table;
+    width: 100%;
+    height: auto;
+    padding: 100px 0;
+    text-align: center;
+    color: #000;
+    background-color: #fff;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    font-weight: 100;
+}
+
+
+
+.section-body {
     display: table-cell;
     vertical-align: middle;
 }
 
 .brand-heading {
     font-size: 40px;
+    font-weight: 100;
+    color: #fff;
+}
+
+.contact-heading {
+    font-size: 30px;
+    font-weight: 100;
+    color: #fff;
 }
 
 .intro-text {
     font-size: 18px;
 }
 
+@media(max-width:767px) {
+    .navbar-nav>li>a 
+    {
+       color: #000;
+    }
+}
+
 @media(min-width:767px) {
-    .intro {
+    .intro, .solution, .references, .contact 
+    {
         height: 100%;
         padding: 0;
     }
 
     .brand-heading {
         font-size: 70px;
+        font-weight: 100;
     }
 
     .intro-text {
         font-size: 25px;
     }
 }
+
 
 .btn-circle {
     width: 70px;
@@ -259,7 +312,6 @@ a:focus {
     width: 100%;
     padding: 50px 0;
     color: #fff;
-    background: url(../img/bokeh.jpg) no-repeat center center scroll;
     background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -290,8 +342,7 @@ a:focus {
 
 .btn {
     text-transform: uppercase;
-    font-family: 'Courgette', cursive,Helvetica,Arial,sans-serif;
-    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
