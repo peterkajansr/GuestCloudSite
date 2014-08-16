@@ -1,0 +1,58 @@
+{% extends "crm/base.html" %}
+
+{% load staticfiles %}
+{% load i18n %}
+
+{% block base_content %}
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Guestcloud</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">{{user.username}}</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      {% block admin_content %}
+      <!-- sidebar -->
+      <div class="col-sm-3 col-md-2 sidebar">
+         <ul class="nav nav-sidebar">
+           <li>
+             <a href="{% url 'crm:profile_home' user.username %}">{% trans "Home" %}</a>
+           </li>
+           <li>
+             <a href="#">Import</a>
+           </li>
+           <li>
+             <a href="#">Send emails</a>
+           </li>
+           <li>
+             <a href="#">Export</a>
+           </li>
+           <li>
+             <a href="{% url 'crm:guestflow' user.username %}">GuestFlow</a>
+           </li>
+         </ul>
+      </div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        {% block main_content %}
+        {% endblock main_content %}
+      </div>
+      {% endblock admin_content %}
+    </div> <!-- row -->
+  </div> <!-- <div class="container-fluid"> -->
+
+{% endblock base_content %}
