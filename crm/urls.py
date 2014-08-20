@@ -9,5 +9,7 @@ urlpatterns = patterns('',
     url(r'^p/(?P<username>[^/]*)/', include([
         url(r'^$', views.profile_home, name='profile_home'),
         url(r'^guestflow/$', views.guestflow, name='guestflow'),
+        url(r'^import/$', views.import_guest, name='import'),
+        url(r'^guests/$', views.guests, name='guests'),
     ])), 
 )

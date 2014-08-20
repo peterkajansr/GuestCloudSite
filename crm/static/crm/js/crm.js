@@ -4,7 +4,7 @@ var auth;
 
 
 $(document).ready(function() {
-    table = $('#table_id').DataTable({
+    table = $('#guestflow_table').DataTable({
         "columnDefs" : [{
             "targets" : [0],
             "visible" : false,
@@ -28,6 +28,16 @@ $(document).ready(function() {
             }
         }
         return false;
+    });
+    
+    $('.guest_import_btn').click(function(){
+       console.log('import');
+       $.ajax({
+          type: 'POST',
+          url: '/p/vojto/import',
+          data: {},
+          async:false
+        }); 
     });
 }); 
 
