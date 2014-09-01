@@ -1,6 +1,8 @@
 {% extends "crm/admin_base.html" %}
 
 {% load staticfiles %}
+{% load crm %}
+{% load i18n %}
 
 {% block title %}Admin{% endblock %}
 
@@ -10,26 +12,39 @@
 {% block admin_content %}
   <div class="container">
     <div class="row placeholders">
-      <div class="col-xs-6 col-sm-3 placeholder">
-        <img src="{% static 'common/img/GFlogo.png' %}" class="img-responsive" alt="Generic placeholder thumbnail">
-        <h4>Import</h4>
-        <span class="text-muted">Import your guest list</span>
-      </div>
-      <div class="col-xs-6 col-sm-3 placeholder">
-        <img src="{% static 'common/img/GFlogo.png' %}" class="img-responsive" alt="Generic placeholder thumbnail">
-        <h4>Send emails</h4>
-        <span class="text-muted">Email to the selected guests</span>
-      </div>
-      <div class="col-xs-6 col-sm-3 placeholder">
-        <img src="{% static 'common/img/GFlogo.png' %}" class="img-responsive" alt="Generic placeholder thumbnail">
-        <h4>Export</h4>
-        <span class="text-muted">Export the actual guest list</span>
-      </div>
-      <div class="col-xs-6 col-sm-3 placeholder">
-        <a href="{% url 'crm:guestflow' user.username %}">
+      <div class="col-xs-6 col-sm-4 placeholder">
+        <a href="{% user_url 'crm:import' %}">
           <img src="{% static 'common/img/GFlogo.png' %}" class="img-responsive" alt="Generic placeholder thumbnail">
-          <h4>GuestFlow</h4>
-          <span class="text-muted">Export the actual guest list</span>
+          <h4>{% trans "Import" %}</h4>
+          <span class="text-muted">{% trans "Import your guest list" %}</span>
+        </a>
+      </div>
+      <div class="col-xs-6 col-sm-4 placeholder">
+        <a href="{% user_url 'crm:guests' %}">
+          <img src="{% static 'common/img/GFlogo.png' %}" class="img-responsive" alt="Generic placeholder thumbnail">
+          <h4>{% trans "Manage" %}</h4>
+          <span class="text-muted">{% trans "Manage your guestlist" %}</span>
+        </a>
+      </div>
+      <div class="col-xs-6 col-sm-4 placeholder">
+        <a href="{% user_url 'crm:guests' %}">
+          <img src="{% static 'common/img/GFlogo.png' %}" class="img-responsive" alt="Generic placeholder thumbnail">
+          <h4>{% trans "Send emails" %}</h4>
+          <span class="text-muted">{% trans "Email to the selected guests" %}</span>
+        </a>
+      </div>
+      <div class="col-xs-6 col-sm-4 placeholder">
+        <a href="{% user_url 'crm:guests' %}">
+          <img src="{% static 'common/img/GFlogo.png' %}" class="img-responsive" alt="Generic placeholder thumbnail">
+          <h4>{% trans "Export" %}</h4>
+          <span class="text-muted">{% trans "Export the actual guest list" %}</span>
+        </a>
+      </div>
+      <div class="col-xs-6 col-sm-4 placeholder">
+        <a href="{% user_url 'crm:guestflow' %}">
+          <img src="{% static 'common/img/GFlogo.png' %}" class="img-responsive" alt="Generic placeholder thumbnail">
+          <h4>{% trans "GuestFlow" %}</h4>
+          <span class="text-muted">{% trans "Export the actual guest list" %}</span>
         </a>
       </div>
     </div>

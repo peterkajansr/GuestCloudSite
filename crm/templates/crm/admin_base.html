@@ -31,10 +31,10 @@
       <div class="col-sm-3 col-md-2 sidebar">
          <ul class="nav nav-sidebar">
            <li>
-             <a href="{% url 'crm:profile_home' user.username %}">{% trans "Home" %}</a>
+             <a href="{% url 'crm:import' user.username %}">Import</a>
            </li>
            <li>
-             <a class="guest_import_btn" href="#">Import</a>
+             <a href="{% url 'crm:guests' user.username %}">Manage</a>
            </li>
            <li>
              <a href="#">Send emails</a>

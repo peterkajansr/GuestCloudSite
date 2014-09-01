@@ -1,0 +1,14 @@
+{% extends "crm/admin_base.html" %}
+
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}{% trans "Import - Admin" %}{% endblock %}
+
+{% block main_content %}
+  <h1 class="page-header">Import</h1>  
+  <form method="post" enctype="multipart/form-data" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Import">
+  </form>
+{% endblock main_content %}

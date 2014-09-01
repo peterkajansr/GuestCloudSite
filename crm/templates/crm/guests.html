@@ -2,7 +2,9 @@
 
 {% load staticfiles %}
 {% load i18n %}
-{% block title %}{% trans "GuestFlow - Admin" %}{% endblock %}
+{% load crm %}
+
+{% block title %}{% trans "Manage" %}{% endblock %}
 
 {% block head %}
   <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css">
@@ -10,8 +12,6 @@
   
   <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
   <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/plug-ins/be7019ee387/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-  <script src='https://cdn.firebase.com/v0/firebase.js'></script>
-  <script type='text/javascript' src='https://cdn.firebase.com/js/simple-login/1.3.0/firebase-simple-login.js'></script>
   <script src="{% static 'crm/js/crm.js' %}"></script>
   
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -22,16 +22,11 @@
 {% endblock %}
 
 {% block main_content %}
-  <h1 class="page-header">GuestFlow</h1>  
+  <h1 class="page-header">{% trans "Manage your guestlist" %}</h1>  
   <div class="table-responsive">
     <div class="table-search-cont">
       <input id="search" type="search" class="form-control" placeholder="Search guest">
     </div>
-    <form method="post" enctype="multipart/form-data" action="">
-      {% csrf_token %}
-      {{form.as_p}}
-      <input type="submit" value="Import">
-    </form>
     <table id="table_id" class="table table-striped table-hover">
       <thead>
         <tr>
@@ -44,12 +39,14 @@
       </thead>
       <tbody>
         {% for guest in guests %}
-          <tr>
-            <td>guest.first_name</td>
-            <td>guest.last_name</td>
-            <td>guest.custom1</td>
-            <td>guest.custom2</td>
-          </tr>
+            <tr>
+              <td><a href="{% user_url 'crm:guest_detail' guest_id=guest.id %}">{{guest.first_name}}</a></td>
+              <td>{{guest.last_name}}</td>
+              <td>{{guest.custom1}}</td>
+              <td>{{guest.custom2}}</td>
+              <td>{{guest.accomp}}</td>
+            </tr>
+          
         {% endfor %}
       </tbody>
     </table>

@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db.models import Model, CharField
+from django.db.models.fields import EmailField
 
 class User(AbstractUser):
     
@@ -10,12 +11,13 @@ class User(AbstractUser):
 class Guest(Model):
     first_name = CharField(max_length=50, default='')
     last_name = CharField(max_length=50, default='')
-    custom1 = CharField(max_length=256, default='')
-    custom2 = CharField(max_length=256, default='')
-    note = CharField(max_length=1024, default='')
+    email = EmailField(default='')
+    custom1 = CharField(max_length=256, default='', blank=True)
+    custom2 = CharField(max_length=256, default='', blank=True)
+    note = CharField(max_length=1024, default='', blank=True)
     
     @classmethod
     def list(cls, user, event):
-        cls.objects.all()       # TODO by user and event
+        return cls.objects.all()       # TODO by user and event
     
     
