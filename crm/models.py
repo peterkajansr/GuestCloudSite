@@ -20,4 +20,9 @@ class Guest(Model):
     def list(cls, user, event):
         return cls.objects.all()       # TODO by user and event
     
+    @classmethod
+    def delete(cls, guest_ids):
+        ids = [int(the_id) for the_id in guest_ids]
+        return cls.objects.filter(id__in=ids).delete()
+    
     

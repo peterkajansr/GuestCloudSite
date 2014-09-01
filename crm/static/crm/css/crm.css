@@ -112,7 +112,7 @@ body {
 /* CUSTOM css */
 .table-search-cont {
     width: 80%;
-    margin: auto;
+    margin: 0 auto 20px;
 }
 
 .table-info-cont {

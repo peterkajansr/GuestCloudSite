@@ -30,11 +30,15 @@ def handle_uploaded_file(the_file, request):
     f = TextIOWrapper(the_file.file, encoding=request.encoding)
     reader = csv.reader(f, delimiter=',', quotechar='"')
     for row in reader:
-        Guest.objects.create(
-            first_name = row[0],
-            last_name = row[1],
-            email = row[2],
-        )
+        attrs = {}
+        colums_cnt = len(row)
+        for i, guest_attr in enumerate(
+                ['first_name', 'last_name', 'email', 'custom1', 'custom2', 'note']):
+            if i >= colums_cnt:
+                break
+            attrs[guest_attr]=row[i].strip()
+        
+        Guest.objects.create(**attrs)
         
 
 @login_required
@@ -56,6 +60,11 @@ def import_guest(request):
 @login_required
 @own_profile
 def guests(request):        
+    if request.method == 'POST':
+        if 'delete' in request.POST:
+            guest_ids = request.POST.getlist('guests')
+            Guest.delete(guest_ids)
+            
     return render(request, 'crm/guests.html', {
        'guests' : Guest.list(request.user, 'actual_event'),
     })
@@ -64,14 +73,16 @@ def guests(request):
 @login_required
 @own_profile
 def guest_detail(request, guest_id):        
+    guest = get_object_or_404(Guest, pk=guest_id)
     if request.method == 'POST':
-        form = GuestForm(request.POST)
+        form = GuestForm(request.POST, instance=guest)
         if form.is_valid():
-            form.save()
+            if 'cancel' not in request.POST:
+                form.save()
+            
             return HttpResponseRedirect(reverse('crm:guests', 
                                                 kwargs={'username': request.user.username})) 
     else:
-        guest = get_object_or_404(Guest, pk=guest_id)
         form = GuestForm(instance=guest)
     
     return render(request, 'crm/guest_detail.html', {

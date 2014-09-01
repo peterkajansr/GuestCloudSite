@@ -26,6 +26,12 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LANGUAGE_CODE = 'en' #default language
+
+from django.utils.translation import ugettext_lazy as _
+LANGUAGES = (
+  ('en', _('English')),
+)
 
 # Application definition
 

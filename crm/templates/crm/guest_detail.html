@@ -5,14 +5,15 @@
 
 {% block title %}{% trans "Edit guest" %}{% endblock %}
 {% block main_content %}
-
+<h1 class="page-header">{% trans "Editing guest" %}</h1>  
 {% bootstrap_messages %}
 <form method="post" class="form">
   {% csrf_token %}
   {% bootstrap_form form layout='horizontal' form_group_class='row form-group' %}
 
   <div class="row form-group">
-    <input type="submit" class="btn btn-primary col-md-offset-3" value="Sign up"/>
+    <input type="submit" class="btn btn-primary col-md-offset-3" name="edit" value="{% trans 'Edit guest' %}"/>
+    <input type="submit" class="btn btn-primary" name="cancel" value="{% trans 'Cancel' %}"/>
   </div>
 </form>
 

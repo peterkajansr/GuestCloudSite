@@ -12,7 +12,7 @@
   
   <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
   <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/plug-ins/be7019ee387/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-  <script src="{% static 'crm/js/crm.js' %}"></script>
+  
   
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -27,28 +27,46 @@
     <div class="table-search-cont">
       <input id="search" type="search" class="form-control" placeholder="Search guest">
     </div>
-    <table id="table_id" class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Surname</th>
-          <th>Custom 1</th>
-          <th>Custom 2</th>
-          <th>Guests</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for guest in guests %}
-            <tr>
-              <td><a href="{% user_url 'crm:guest_detail' guest_id=guest.id %}">{{guest.first_name}}</a></td>
-              <td>{{guest.last_name}}</td>
-              <td>{{guest.custom1}}</td>
-              <td>{{guest.custom2}}</td>
-              <td>{{guest.accomp}}</td>
-            </tr>
-          
-        {% endfor %}
-      </tbody>
-    </table>
+    <form method="post">
+      {% csrf_token %}
+      <input type="submit" class="btn btn-primary" name="delete" value="{% trans 'Delete' %}"/>
+      <table id="guests_table" class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>&nbsp;</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Custom 1</th>
+            <th>Custom 2</th>
+            <th>Guests</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for guest in guests %}
+              <tr>
+                <td class="action">
+                  <input type="checkbox" name="guests" value="{{guest.id}}"/>
+                  <input type="hidden" name="url" value="{% user_url 'crm:guest_detail' guest_id=guest.id %}"/>
+                </td>
+                <td>{{guest.first_name}}</td>
+                <td>{{guest.last_name}}</td>
+                <td>{{guest.custom1}}</td>
+                <td>{{guest.custom2}}</td>
+                <td>{{guest.accomp}}</td>
+              </tr>
+            
+          {% endfor %}
+        </tbody>
+      </table>
+    </form>
   </div>
+  
+  <script>
+    $(function() {
+      $('#guests_table td:not(.action)').click( function() {
+        console.log($(this).closest('tr').find('[name="url"]').val());
+        window.location = $(this).closest('tr').find('[name="url"]').val();
+      });
+    });
+  </script>
 {% endblock main_content %}
