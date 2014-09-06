@@ -1,0 +1,20 @@
+{% extends "crm/admin_base.html" %}
+
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block title %}{% trans "Edit guest" %}{% endblock %}
+{% block main_content %}
+<h1 class="page-header">{% trans "Editing guest" %}</h1>  
+{% bootstrap_messages %}
+<form method="post" class="form">
+  {% csrf_token %}
+  {% bootstrap_form form form_group_class='row form-group' %}
+
+  <div class="row form-group">
+    <input type="submit" class="btn btn-primary" name="edit" value="{% trans 'Edit mail' %}"/>
+    <input type="submit" class="btn btn-primary" name="cancel" value="{% trans 'Cancel' %}"/>
+  </div>
+</form>
+
+{% endblock main_content %}

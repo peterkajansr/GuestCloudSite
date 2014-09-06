@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db.models import Model, CharField
-from django.db.models.fields import EmailField
+from django.db.models.fields import EmailField, TextField
 
 class User(AbstractUser):
     
@@ -25,4 +25,14 @@ class Guest(Model):
         ids = [int(the_id) for the_id in guest_ids]
         return cls.objects.filter(id__in=ids).delete()
     
+class Invitation(Model):
+    name = CharField(max_length=256, default='')
+    subject = CharField(max_length=256, default='')
+    message = TextField(default='')
     
+    def __str__(self):
+        return self.name
+    
+    @classmethod
+    def list(cls):
+        return cls.objects.all()       # TODO by user and event

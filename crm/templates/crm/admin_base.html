@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load i18n %}
+{% load crm %}
 
 {% block base_content %}
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -31,19 +32,19 @@
       <div class="col-sm-3 col-md-2 sidebar">
          <ul class="nav nav-sidebar">
            <li>
-             <a href="{% url 'crm:import' user.username %}">Import</a>
+             <a href="{% user_url 'crm:import' %}">Import</a>
            </li>
            <li>
-             <a href="{% url 'crm:guests' user.username %}">Manage</a>
+             <a href="{% user_url 'crm:guests' %}">Manage</a>
            </li>
            <li>
-             <a href="#">Send emails</a>
+             <a href="{% user_url 'crm:invitations' %}">Invite</a>
            </li>
            <li>
              <a href="#">Export</a>
            </li>
            <li>
-             <a href="{% url 'crm:guestflow' user.username %}">GuestFlow</a>
+             <a href="{% user_url 'crm:guestflow' %}">GuestFlow</a>
            </li>
          </ul>
       </div>

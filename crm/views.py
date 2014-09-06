@@ -2,10 +2,11 @@ import csv
 from io import TextIOWrapper
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http.response import HttpResponseRedirect, Http404
+from django.http.response import HttpResponseRedirect, Http404, HttpResponse
 from django.core.urlresolvers import reverse
-from crm.forms import UserCreationForm, ImportGuestsForm, GuestForm
-from crm.models import Guest
+from crm.forms import UserCreationForm, ImportGuestsForm, GuestForm,\
+    ChooseInvitationForm, InvitationForm
+from crm.models import Guest, Invitation
 # from firebasein.firebase import Firebase
 
 def own_profile(function):
@@ -89,7 +90,59 @@ def guest_detail(request, guest_id):
         'form': form,
     })
 
+@login_required
+@own_profile
+def invitations(request):        
+    form = ChooseInvitationForm()
+    if request.method == 'POST':
+        form = ChooseInvitationForm(request.POST)
+        if 'invite' in request.POST:
+            if form.is_valid():
+                return render(request, 'crm/invitations.html', {
+                   'messages_send': True,
+                   'form' : form,
+                   'guests' : Guest.list(request.user, 'actual_event'),
+                })
+        elif 'edit' in request.POST:
+            if form.is_valid():
+                print(form.cleaned_data)
+                return HttpResponseRedirect(
+                    reverse('crm:invitation_detail', 
+                            kwargs={'username': request.user.username,
+                                    'invitation_id': form.cleaned_data['invitation'].pk}))
 
+    return render(request, 'crm/invitations.html', {
+       'form': form,
+       'guests' : Guest.list(request.user, 'actual_event'),
+       'mails': Invitation.list(),
+    })
+    
+@login_required
+@own_profile
+def invitation_detail(request, invitation_id):        
+    guest = get_object_or_404(Invitation, pk=invitation_id)
+    if request.method == 'POST':
+        form = InvitationForm(request.POST, instance=guest)
+        if form.is_valid():
+            if 'cancel' not in request.POST:
+                form.save()
+            
+            return HttpResponseRedirect(reverse('crm:invitations', 
+                                                kwargs={'username': request.user.username})) 
+    else:
+        form = InvitationForm(instance=guest)
+    
+    return render(request, 'crm/invitation_detail.html', {
+        'form': form,
+    })
+    
+@login_required
+@own_profile
+def invitation_preview(request, invitation_id):        
+    invitation = get_object_or_404(Invitation, pk=invitation_id)
+    return HttpResponse(invitation.message)
+    
+    
 @login_required
 @own_profile
 def guestflow(request):
@@ -110,4 +163,5 @@ def register(request):
             return HttpResponseRedirect(reverse('crm:profile_redirect'))
     
     return render(request, 'registration/register.html', {'form': form})
-    
+
+

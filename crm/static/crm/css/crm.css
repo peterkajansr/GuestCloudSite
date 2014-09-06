@@ -119,3 +119,21 @@ body {
     width: 80%;
     margin: 0 auto 20px;
 }
+
+.preview > .subject,
+.preview > .message {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 5px 10px;
+    width: 100%;
+}
+
+.preview > .subject {
+    min-height: 30px;
+}
+
+.preview > .message {
+    min-height: 250px;
+}
+
