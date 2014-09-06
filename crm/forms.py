@@ -25,7 +25,7 @@ class GuestForm(ModelForm):
         fields = '__all__'
         
 class ChooseInvitationForm(Form):
-    invitation = ModelChoiceField(queryset=Invitation.list())
+    invitation = ModelChoiceField(queryset=Invitation.list(), label="Choose message")
     
 
 class InvitationForm(ModelForm):

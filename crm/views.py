@@ -93,33 +93,31 @@ def guest_detail(request, guest_id):
 @login_required
 @own_profile
 def invitations(request):        
-    form = ChooseInvitationForm()
+    template_params = {}
+    form = None
     if request.method == 'POST':
         form = ChooseInvitationForm(request.POST)
-        if 'invite' in request.POST:
-            if form.is_valid():
-                return render(request, 'crm/invitations.html', {
-                   'messages_send': True,
-                   'form' : form,
-                   'guests' : Guest.list(request.user, 'actual_event'),
-                })
-        elif 'edit' in request.POST:
-            if form.is_valid():
-                print(form.cleaned_data)
+        if form.is_valid():
+            if 'invite' in request.POST:
+                template_params['sent'] = True
+            elif 'delete' in request.POST:
+                form.cleaned_data['invitation'].delete()
+                template_params['deleted'] = True
+            elif 'edit' in request.POST:
                 return HttpResponseRedirect(
-                    reverse('crm:invitation_detail', 
+                    reverse('crm:invitation_edit', 
                             kwargs={'username': request.user.username,
                                     'invitation_id': form.cleaned_data['invitation'].pk}))
 
-    return render(request, 'crm/invitations.html', {
-       'form': form,
-       'guests' : Guest.list(request.user, 'actual_event'),
-       'mails': Invitation.list(),
-    })
+    template_params.setdefault('form', form if form else ChooseInvitationForm())
+    template_params.setdefault('guests', Guest.list(request.user, 'actual_event'))
+    template_params.setdefault('mails', Invitation.list())
+    
+    return render(request, 'crm/invitations.html', template_params)
     
 @login_required
 @own_profile
-def invitation_detail(request, invitation_id):        
+def invitation_edit(request, invitation_id):        
     guest = get_object_or_404(Invitation, pk=invitation_id)
     if request.method == 'POST':
         form = InvitationForm(request.POST, instance=guest)
@@ -134,6 +132,30 @@ def invitation_detail(request, invitation_id):
     
     return render(request, 'crm/invitation_detail.html', {
         'form': form,
+    })
+    
+    
+@login_required
+@own_profile
+def invitation_create(request):        
+    invitation = Invitation()
+    if request.method == 'POST':
+        form = InvitationForm(request.POST, instance=invitation)
+        if form.is_valid():
+            if 'cancel' not in request.POST:
+                form.save()
+            
+            return HttpResponseRedirect(
+                reverse('crm:invitations', 
+                    kwargs={
+                        'username': request.user.username,
+                    })) 
+    else:
+        form = InvitationForm(instance=invitation)
+    
+    return render(request, 'crm/invitation_detail.html', {
+        'form': form,
+        'create': True
     })
     
 @login_required
