@@ -28,7 +28,8 @@ class Guest(Model):
 class Invitation(Model):
     name = CharField(max_length=256, default='')
     subject = CharField(max_length=256, default='')
-    message = TextField(default='')
+    html_body = TextField(default='', blank=True)
+    text_body = TextField(default='')
     
     def __str__(self):
         return self.name
@@ -36,3 +37,5 @@ class Invitation(Model):
     @classmethod
     def list(cls):
         return cls.objects.all()       # TODO by user and event
+    
+    

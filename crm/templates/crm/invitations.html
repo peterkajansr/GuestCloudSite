@@ -25,23 +25,35 @@
 {% block main_content %}
   <h1 class="page-header">{% trans "Invite guest to your event" %}</h1>  
   
-  <div>
+  
     {% if sent %}
-      {% trans "Messages were successfully sent" %}
+      <div class="alert alert-success" role="alert">
+        {% trans "Messages were successfully sent" %}
+      </div>
     {% elif deleted %}
-      {% trans "Message was successfully deleted" %}
+      <div class="alert alert-success" role="alert">
+        {% trans "Message was successfully deleted" %}
+      </div>
     {% endif %}
-  </div>
+    
+    {% if guests_form.errors %}
+      <div class="alert alert-danger" role="alert">
+        {% trans "Recipients has to be selected" %}
+      </div>
+    {% endif %}
+  
   <form method="post">
     {% csrf_token %}
     
-    {% bootstrap_form form %}
+    {% bootstrap_form choose_message_form %}
   
     <div class="form-group">
       <a class="btn btn-default" href="{% user_url 'crm:invitation_create' %}">{% trans 'Create new' %}</a>
       <input type="submit" class="btn btn-default" name="edit" value="{% trans 'Edit' %}"/>
       <input type="submit" class="btn btn-default" name="delete" value="{% trans 'Delete' %}"/>
     </div>
+
+    {% bootstrap_form send_form %}
     
     <div class="form-group">
       <label class="control-label">{% trans "Preview" %}</label>
@@ -53,10 +65,10 @@
         <iframe class="message" src=""></iframe>
       </div>
     </div>
-        
-    
-    <div class="form-group">
+   
+    <div class="form-group ">
       <label class="control-label">{% trans "Select recipients" %}</label>
+      
       <div class="table-responsive">
         <div class="table-search-cont">
           <input id="search" type="search" class="form-control" placeholder="Search guest">
@@ -72,11 +84,13 @@
               <th>Guests</th>
             </tr>
           </thead>
+          
           <tbody>
-            {% for guest in guests %}
+            {% for guest in guests_form.guests.field.queryset %}
                 <tr>
                   <td class="action">
-                    <input type="checkbox" name="guests" value="{{guest.id}}"/>
+                    <input id="id_guests_{{guest.id}}" type="checkbox" name="guests" value="{{guest.id}}" 
+                      {% if guest.id in guests_form.selected_guests %} checked="checked"{% endif %}/>
                     <input type="hidden" name="url" value="{% user_url 'crm:guest_detail' guest_id=guest.id %}"/>
                   </td>
                   <td>{{guest.first_name}}</td>
@@ -108,15 +122,20 @@
     {% endfor %}
   </div>
   <script>
+    function show_preview(message_id) {
+      if (message_id == undefined)
+        return;
+        
+      mail_elem = $('#mail_' + message_id);
+      $('.preview .subject').html(mail_elem.children('.subject').text());
+      $('.preview .message').attr('src', mail_elem.children('.message').text());
+    }
     // preview
     $(function() {
+      show_preview($('#id_invitation').val());
+      
       $('#id_invitation').change( function() {
-        mail_elem = $('#mail_' + $(this).val());
-        console.log(mail_elem.html());
-        console.log(mail_elem.children('.subject').text());
-        
-        $('.preview .subject').html(mail_elem.children('.subject').text());
-        $('.preview .message').attr('src', mail_elem.children('.message').text());
+        show_preview($(this).val());
       });
     });
     

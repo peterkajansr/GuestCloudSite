@@ -98,3 +98,6 @@ AUTH_USER_MODEL = 'crm.User'
 BOOTSTRAP3 = {
     'horizontal_label_class': 'col-md-offset-3 col-md-2',
 }
+
+# TODO different in production
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
